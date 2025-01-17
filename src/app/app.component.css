@@ -1,0 +1,6 @@
+.custom-box{
+ width: auto;
+}
+.blinking {
+  animation: flash 20s infinite;
+}

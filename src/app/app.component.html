@@ -1,45 +1,26 @@
-<div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
-  <div class="layout-container">
-    <!-- Layout container -->
-    <div class="layout-page">
-      <!-- Content wrapper -->
-      <div class="content-wrapper">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <div class="row">
-            <!-- Website Analytics-->
-            <div class="col-lg-12 col-md-12 mb-4">
-              <div class="card h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="card-title mb-0">گزارش دما و رطوبت مراکز مخابراتی</h5>
-                </div>
-                <div class="card-body pb-2">
-                  <div class="row">
-                    <div class="col-2 border mx-2" *ngFor="let center of centers">
-                      <div class="center-box-item">
-                        <div class="box-name">
-                          <h5>{{ center.name }}</h5>
-                        </div>
-                        <div class="temp-1">دما {{ center.temp1 }}</div>
-                        <div class="temp-2">دما {{ center.temp2 }}</div>
-                        <div class="hum-1">رطوبت {{ center.hum1 }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+<div class="container-fluid my-4">
+  <div class="row">
+    <div class="custom-box" *ngFor="let center of centers;">
+      <div class=" shadow-lg mb-3">
+        <div class="p-3 card-header text-center bg-label-primary">
+          {{ center.name }}
+        </div>
+        <div class="rounded-bottom bg-label-gray pt-2">
+          <div class="px-5" [ngClass]="changeStatus(center.temp1,null)">
+            <p><i class="fas fa-thermometer-half "></i> دما سالن 1:
+              <strong>{{ center.temp1 }} سانتی گراد </strong></p>
+          </div>
+          <div class="px-5" [ngClass]="changeStatus(center.temp2,null)">
+            <p><i class="fas fa-thermometer-half "></i> دما سالن 2:
+              <strong>{{ center.temp2 }} سانتی
+                گراد </strong></p>
+          </div>
+          <div class="px-5" [ngClass]="changeStatus(null,center.hum)">
+            <p><i class="fas fa-droplet "></i> رطوبت:
+              <strong>{{ center.hum }}%</strong></p>
           </div>
         </div>
-        <!--/ Content -->
-
-        <div class="content-backdrop fade"></div>
       </div>
-      <!--/ Content wrapper -->
     </div>
-
-    <!--/ Layout container -->
   </div>
 </div>
