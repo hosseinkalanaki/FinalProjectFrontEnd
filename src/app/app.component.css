@@ -1,6 +1,16 @@
-.custom-box{
- width: auto;
+.custom-box {
+  width: auto;
 }
-.blinking {
-  animation: flash 20s infinite;
+
+.alarm-animation {
+  animation: alarm 0.6s infinite;
+}
+
+@keyframes alarm {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
 }

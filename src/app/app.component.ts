@@ -5,10 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  tempStatus: string = '';
-  humidityStatus: string = '';
-
+export class AppComponent implements OnInit{
   centers = [
     {name: 'مرکز شماره 1', temp1: 20, temp2: 26, hum: 30},
     {name: 'مرکز شماره 2', temp1: 22, temp2: 28, hum: 35},
@@ -20,20 +17,34 @@ export class AppComponent {
     {name: 'مرکز شماره 8 دارغوزآباد لس آنجلس', temp1: 21, temp2: 27, hum: 33}
   ];
 
+  response: any;
+
   ngOnInit(): void {
     this.getInitialData();
   }
+  async getInitialData(): Promise<void> {
+    const response = await fetch('./api-path', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
 
-  public getInitialData() {
+    if (response.ok) {
+      this.response = await response.json(); // Parse JSON response
+      console.log(this.response);
+    } else {
+      console.error('Error:', response.statusText);
+    }
   }
 
   // @ts-ignore
   public changeStatus(temp: number | null, humidity: number | null):string {
     if (temp) {
-      return  18 < temp && temp < 27 ? 'bg-label-success' : 'bg-label-danger';
+      return  18 < temp && temp < 27 ? 'bg-label-success' : 'bg-label-danger alarm-animation';
     }
     if (humidity) {
-      return 40 < humidity && humidity < 55 ? 'bg-label-info' : 'bg-label-danger';
+      return 40 < humidity && humidity < 55 ? 'bg-label-info' : 'bg-label-danger alarm-animation';
     }
   }
 }
