@@ -1,32 +1,143 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Center } from './models/center';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
-  centers = [
-    {name: 'مرکز شماره 1', temp1: 20, temp2: 26, hum: 30},
-    {name: 'مرکز شماره 2', temp1: 22, temp2: 28, hum: 35},
-    {name: 'مرکز شماره 3', temp1: 22, temp2: 28, hum: 35},
-    {name: 'مرکز شماره 4', temp1: 50, temp2: 28, hum: 40},
-    {name: 'مرکز شماره 5', temp1: 10, temp2: 28, hum: 41},
-    {name: 'مرکز شماره 6 نمیدانم از نام مکان اطلاعی ندارم', temp1: 22, temp2: 28, hum: 35},
-    {name: 'مرکز شماره 7 دارغوز آباد آفریقای جنوبی', temp1: 22, temp2: 28, hum: 50},
-    {name: 'مرکز شماره 8 دارغوزآباد لس آنجلس', temp1: 21, temp2: 27, hum: 33}
-  ];
+export class AppComponent implements OnInit {
 
+  public centers:Center[]=[
+    {
+        "centerName":"مرکز شماره 1",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":true,
+                "value":25.2
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":24.5
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":50
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 2",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":12.1
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":11.2
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":40
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 3",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":21.8
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":19.2
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":20
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 4",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":31.2
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":27.3
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":40
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 5",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":24.1
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":23.5
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":50
+            }
+        ]
+    }
+];
+
+  constructor() {
+  }
   response: any;
 
   ngOnInit(): void {
-    this.getInitialData();
+    //this.getInitialData();
   }
   async getInitialData(): Promise<void> {
     const response = await fetch('./api-path', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
     });
 
@@ -39,12 +150,16 @@ export class AppComponent implements OnInit{
   }
 
   // @ts-ignore
-  public changeStatus(temp: number | null, humidity: number | null):string {
+  public changeStatus(temp: number | null, humidity: number | null): string {
     if (temp) {
-      return  18 < temp && temp < 27 ? 'bg-label-success' : 'bg-label-danger alarm-animation';
+      return 18 < temp && temp < 27
+        ? 'bg-label-success'
+        : 'bg-label-danger alarm-animation';
     }
     if (humidity) {
-      return 40 < humidity && humidity < 55 ? 'bg-label-info' : 'bg-label-danger alarm-animation';
+      return 40 < humidity && humidity < 55
+        ? 'bg-label-info'
+        : 'bg-label-danger alarm-animation';
     }
   }
 }

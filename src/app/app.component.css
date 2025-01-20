@@ -1,16 +1,54 @@
 .custom-box {
-  width: auto;
+  width: 18rem;
 }
 
 .alarm-animation {
   animation: alarm 0.6s infinite;
 }
 
+i {
+  font-size: 20px;
+}
 @keyframes alarm {
-  0%, 100% {
-    opacity: 0.1;
+  0%,
+  100% {
+    box-shadow: 0px 0px 12px 0px #ff5b5c, inset 0px 0px 12px 0px #ed0001;
   }
   50% {
-    opacity: 1;
+    box-shadow: 0px 0px 0px 0px #ff5b5c, inset 0px 0px 12px 0px #ed0001;
   }
+}
+
+.rounded {
+  border-radius: 8px !important;
+}
+.rounded-top {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+}
+.rounded-bottom {
+  border-bottom-left-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+
+
+.bg-label-danger h6{
+  color: #ff5b5c !important;
+}
+
+.bg-label-primary h6{
+  color: #5a8dee !important;
+}
+
+.bg-label-success h6{
+  color: #39da8a !important;
+}
+
+.custom-box,
+.custom-box *{
+  cursor: default;
+}
+
+.card-header{
+  background-color: #f3f4f5;
 }

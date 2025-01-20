@@ -1,23 +1,75 @@
 <div class="container-fluid my-4">
   <div class="row">
-    <div class="custom-box" *ngFor="let center of centers;">
-      <div class="card shadow-lg mb-3">
-        <div class="p-3 card-header text-center bg-label-primary">
-          {{ center.name }}
+    <div class="col-12">
+      <h1 class="text-center">
+        گزارش لحظه ایی دما و رطوبت مراکز مخابراتی 
+      </h1>
+    </div>
+    <div class="col custom-box" *ngFor="let center of centers">
+      <div class="card rounded shadow-lg mb-3">
+        <div class="p-3 pb-0 card-header text-center">
+          {{ center.centerName }}
         </div>
         <div class="rounded-bottom bg-label-gray pt-2">
-          <div class="px-5" [ngClass]="changeStatus(center.temp1,null)">
-            <p><i class="fas fa-thermometer-half "></i> دما سالن 1:
-              <strong>{{ center.temp1 }} سانتی گراد </strong></p>
-          </div>
-          <div class="px-5" [ngClass]="changeStatus(center.temp2,null)">
-            <p><i class="fas fa-thermometer-half "></i> دما سالن 2:
-              <strong>{{ center.temp2 }} سانتی
-                گراد </strong></p>
-          </div>
-          <div class="px-5" [ngClass]="changeStatus(null,center.hum)">
-            <p><i class="fas fa-droplet "></i> رطوبت:
-              <strong>{{ center.hum }}%</strong></p>
+          <div class="m-2 border rounded">
+            <ng-container *ngFor="let sensor of center.sensors; let i = index">
+              <ng-container
+                *ngIf="sensor.type == 'Temporary'; else elseTemplate"
+              >
+                <div
+                  class="d-flex flex-column justify-content-center"
+                  [ngClass]="[
+                    sensor.hasAlarm
+                      ? 'bg-label-danger alarm-animation '
+                      : 'bg-label-success ',
+                    i == center.sensors.length - 1
+                      ? 'rounded-bottom'
+                      : 'border-bottom',
+                    i == 0 ? 'rounded-top' : ''
+                  ]"
+                >
+                  <div class="d-flex justify-content-center">
+                  
+                    <p class="m-0">{{ sensor.name }}</p>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <h6 class="m-0">
+                      {{ sensor.value }}
+                    </h6>
+                    <p class="m-0 ms-2">
+                      <i class="fas fa-temperature-low"></i>
+                    </p>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <div
+                  class="d-flex flex-column justify-content-center"
+                  [ngClass]="[
+                    sensor.hasAlarm
+                      ? 'bg-label-danger alarm-animation '
+                      : 'bg-label-primary ',
+                    i == center.sensors.length - 1
+                      ? 'rounded-bottom'
+                      : 'border-bottom',
+                    i == 0 ? 'rounded-top' : ''
+                  ]"
+                >
+                  <div class="d-flex justify-content-center">
+                    
+                    <p class="m-0">{{ sensor.name }}</p>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <h6 class="m-0">
+                      {{ sensor.value }}
+                    </h6>
+                    <p class="m-0 ms-2">
+                      <i class="fas fa-cloud-rain"></i>
+                    </p>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
           </div>
         </div>
       </div>
