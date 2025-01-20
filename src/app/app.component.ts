@@ -123,6 +123,75 @@ export class AppComponent implements OnInit {
                 "value":50
             }
         ]
+    },
+    {
+        "centerName":"مرکز شماره 6",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":24.1
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":23.5
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":50
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 7",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":24.1
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":23.5
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":50
+            }
+        ]
+    },
+    {
+        "centerName":"مرکز شماره 8",
+        "sensors":[
+            {
+                "type":"Temporary",
+                "name":"دمای 1",
+                "hasAlarm":false,
+                "value":24.1
+            },
+            {
+                "type":"Temporary",
+                "name":"دمای 2",
+                "hasAlarm":false,
+                "value":23.5
+            },
+            {
+                "type":"Humidity",
+                "name":"رطوبت کل مرکز",
+                "hasAlarm":false,
+                "value":50
+            }
+        ]
     }
 ];
 
@@ -149,17 +218,4 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // @ts-ignore
-  public changeStatus(temp: number | null, humidity: number | null): string {
-    if (temp) {
-      return 18 < temp && temp < 27
-        ? 'bg-label-success'
-        : 'bg-label-danger alarm-animation';
-    }
-    if (humidity) {
-      return 40 < humidity && humidity < 55
-        ? 'bg-label-info'
-        : 'bg-label-danger alarm-animation';
-    }
-  }
 }
